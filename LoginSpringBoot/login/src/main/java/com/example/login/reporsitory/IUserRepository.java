@@ -14,6 +14,4 @@ public interface IUserRepository extends JpaRepository<User,Long> {
     Boolean existsByUsername(String username);
     // Kiem tra xem email co ton tai trong DB khong
     Boolean existsByEmail(String email);
-
-
 }

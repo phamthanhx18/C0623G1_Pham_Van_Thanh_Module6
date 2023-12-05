@@ -1,7 +1,7 @@
 package com.example.login.model;
 
 public enum RoleName {
-    SALES,
-    WAREHOUSE,
-    MANAGER
+    ROLE_SALES,
+    ROLE_WAREHOUSE,
+    ROLE_MANAGER
 }
