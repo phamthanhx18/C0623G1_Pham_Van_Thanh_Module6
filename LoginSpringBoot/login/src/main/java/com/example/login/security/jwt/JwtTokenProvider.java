@@ -1,20 +1,24 @@
 package com.example.login.security.jwt;
 
-import com.example.login.security.userprincal.MyUserDetails;
+import com.example.login.security.service.AccountDetailsImpl;
+import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 
+@Component
+@Slf4j
 public class JwtTokenProvider {
     private final String JWT_SECRET = "C0623G1";
     private final long JWT_EXPIRATION = 86400;
+
     // Tạo ra jwt từ thông tin user
-    public String generateToken(MyUserDetails userDetails) {
+    public String generateToken(AccountDetailsImpl accountDetails) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
-        // Tạo chuỗi json web token từ id của user.
         return Jwts.builder()
-                .setSubject(Long.toString(userDetails.getUser().getId()))
+                .setSubject(Long.toString(accountDetails.getId()))
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
@@ -31,18 +35,27 @@ public class JwtTokenProvider {
         return Long.parseLong(claims.getSubject());
     }
 
+    public String getUserNameFromJwtToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(JWT_SECRET)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.get("username", String.class);
+    }
+
     public boolean validateToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(authToken);
             return true;
         } catch (MalformedJwtException ex) {
-            System.out.println("JWT Token không hợp lệ");
+            log.error("Invalid JWT token");
         } catch (ExpiredJwtException ex) {
-            System.out.println("JWT Token đã hết hạn");
+            log.error("Expired JWT token");
         } catch (UnsupportedJwtException ex) {
-            System.out.println("JWT Token không được hỗ trợ");
+            log.error("Unsupported JWT token");
         } catch (IllegalArgumentException ex) {
-            System.out.println("JWT Token trống.");
+            log.error("JWT claims string is empty.");
         }
         return false;
     }
