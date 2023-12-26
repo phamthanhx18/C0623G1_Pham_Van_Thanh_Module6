@@ -1,0 +1,35 @@
+.icon {
+    background: #A82216;
+    box-shadow: 0px 4px 4px 0px rgba(168, 34, 22, 0.25);
+    padding: 5px 10px;
+}
+
+.icon i {
+    color: #FFF;
+    font-size: 20px;
+}
+
+.menu {
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(168, 34, 22, 0.25);
+    padding: 5px 10px;
+}
+
+.support p {
+    padding: 0;
+    margin: 0;
+}
+
+.iconRight {
+    display: flex;
+}
+
+.iconHeaderRight {
+    font-size: 25px;
+    padding: 10px 20px;
+}
+
+.navBottom {
+    background: #A82216;
+    height: 30px;
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/C0623G1-Repo-BE" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/C0623G1-Repo-FE" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring-boot-jwt/spring-boot-jwt-example" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring-boot-spring-security-jwt-authentication/spring-boot-spring-security-jwt-authentication" vcs="Git" />
+  </component>
+</project>

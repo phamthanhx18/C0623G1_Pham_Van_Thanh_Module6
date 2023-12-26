@@ -8,6 +8,7 @@ import com.example.fashionshop.service.IAccountService;
 import com.example.fashionshop.service.IRoleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,18 +26,17 @@ public class AuthController {
     @Autowired
     IRoleService roleService;
     @Autowired
-    PasswordEncoder passwordEncoder;
-    @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
     JwtProvider jwtProvider;
-    @PostMapping("/signin")
-    public ResponseEntity<?> login(@Valid @RequestBody SignInForm signInForm){
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(signInForm.getUsername(), signInForm.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtProvider.createToken(authentication);
-        AccountDetailsImpl userPrinciple = (AccountDetailsImpl) authentication.getPrincipal();
-        return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getUsername(), userPrinciple.getAuthorities()));
+    @PostMapping("/authenticate")
+    public ResponseEntity<JwtResponse> login(@Valid @RequestBody SignInForm loginRequest) {
+//        String token = authenticateAndGetToken(loginRequest.getUsername(), loginRequest.getPassword());
+        String token = loginRequest.getUsername();
+        return new ResponseEntity<>(new JwtResponse(token), HttpStatus.OK);
     }
+
+//    private String authenticateAndGetToken(String username, String password) {
+//
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+//        return jwtProvider.createToken(authentication);
+//    }
 }

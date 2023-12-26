@@ -1,11 +1,11 @@
 package com.example.fashionshop.security.jwt;
 
-import com.example.fashionshop.security.service.AccountDetailsImpl;
 import com.example.fashionshop.security.service.AccountDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,12 +20,12 @@ import java.io.IOException;
 
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
+
     @Autowired
     private JwtProvider jwtProvider;
+
     @Autowired
     private AccountDetailsServiceImpl accountDetailsService;
-
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
