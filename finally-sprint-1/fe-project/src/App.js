@@ -6,7 +6,10 @@ import {BrowserRouter} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
-import Page1 from "./pages/Page1";
+import TopPhat from "./pages/TopPhat";
+import "react-toastify/dist/ReactToastify.css";
+import CreateStudent from "./pages/CreateStudent";
+import ListChuaThuong from "./pages/ListChuaThuong";
 
 function App() {
   return (
@@ -14,7 +17,9 @@ function App() {
           <BrowserRouter>
               <Routes>
                   <Route path="/" element={<HomePage/>}></Route>
-                  <Route path="/page1" element={<Page1/>}></Route>
+                  <Route path="/top-phat" element={<TopPhat/>}></Route>
+                  <Route path="/list-chua-thuong" element={<ListChuaThuong/>}></Route>
+                  <Route path="/create-student" element={<CreateStudent/>}></Route>
                   <Route path="*" element={<NotFound/>}></Route>
               </Routes>
           </BrowserRouter>
